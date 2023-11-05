@@ -21,7 +21,7 @@ public class Main {
         int opcion;
 
         do {
-        	
+      //el menú  	
             System.out.println("Realiza una nueva acción");
             System.out.println("1. Introduce un nuevo gasto");
             System.out.println("2. Introduce un nuevo ingreso");
