@@ -6,7 +6,7 @@
  */
 public class Gasto extends Dinero {
    	//inserta código aquí
-	public Gasto(String description, double gasto) {
+	public Gasto(double gasto, String description) {
 		// TODO Auto-generated constructor stub
 		this.dinero = gasto;
 		this.description = description; 

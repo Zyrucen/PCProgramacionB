@@ -7,6 +7,6 @@
 public class GastoException extends Exception{
    	//inserta código aquí
 	public GastoException() {
-        super("Error en el gasto: el monto del gasto debe ser mayor que cero.");
-    }
+		String error = ("No");
+        }
 }

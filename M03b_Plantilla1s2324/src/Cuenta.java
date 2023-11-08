@@ -1,22 +1,14 @@
-
 import java.util.ArrayList;
 import java.util.List;
-/** PAC DESARROLLO M03B 1S2324
- *  Sigue las especificaciones del enunciado de la pac de Desarrollo
- *  No se puede importar ninguna otra clase, dentro de esta clase.
- *  Obligatorio utilizar esta plantilla
- *  
- */
+
 public class Cuenta {
 
-   	//inserta código aquí
-	
-	
-	private Double saldo;
+    private double saldo;
     private Usuario usuario;
     private List<Gasto> gastos;
     private List<Ingreso> ingresos;
 
+    // Constructor que recibe un objeto Usuario para inicializar la cuenta
     public Cuenta(Usuario usuario) {
         this.saldo = 0.0;
         this.usuario = usuario;
@@ -24,19 +16,13 @@ public class Cuenta {
         this.ingresos = new ArrayList<>();
     }
 
-    public Cuenta() {
-		// TODO Auto-generated constructor stub
-    	this.saldo = 0.0;
-        this.usuario = usuario;
-        this.gastos = new ArrayList<>();
-        this.ingresos = new ArrayList<>();
-	}
-
-    public Double getSaldo() {
+    // Método para obtener el saldo de la cuenta
+    public double getSaldo() {
         return saldo;
     }
-
-
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
     public Usuario getUsuario() {
         return usuario;
     }
@@ -45,42 +31,43 @@ public class Cuenta {
         this.usuario = usuario;
     }
 
+
+    // Método para agregar un ingreso a la cuenta
     public double addIngresos(String description, double cantidad) {
-        Ingreso ingreso = new Ingreso(description, cantidad);
+        Ingreso ingreso = new Ingreso(cantidad, description);
         ingresos.add(ingreso);
-        saldo += cantidad;
+        setSaldo(getSaldo() + cantidad);  // Actualizar el saldo usando el método setSaldo
         return saldo;
     }
 
-    public double addGastos(String description, double cantidad) {
-        
-    	
-    	Gasto gasto = new Gasto(description, cantidad);
-    	if (cantidad > saldo) {
-            
-            System.out.println("No tienes suficiente dinero para ese gasto. Saldo: " + String.format("%.2f", saldo) + "€");
-           
-    	}else {
-    		gastos.add(gasto);
-            saldo -= cantidad;
-            System.out.println("Gasto añadido correctamente. Nuevo saldo: " + String.format("%.2f", saldo) + "€");
-    	}
-    	return saldo;
-   }
-    
+    // Método para agregar un gasto a la cuenta
+    public double addGastos(String description, double cantidad) throws GastoException {
+        Gasto gasto = new Gasto(cantidad, description);
+        // Lanza una excepción si el gasto es mayor que el saldo disponible
+        if (cantidad > getSaldo()) {
+            throw new GastoException();
+        } else {
+            // Agrega el gasto a la lista y actualiza el saldo
+            gastos.add(gasto);
+            setSaldo(getSaldo() - cantidad);  // Actualizar el saldo usando el método setSaldo
+            System.out.println("Gasto añadido correctamente. Nuevo saldo: " + String.format("%.2f", getSaldo()) + "€");
+        }
+        return saldo;
+    }
+
+    // Método para obtener la lista de ingresos de la cuenta
     public List<Ingreso> getIngresos() {
-        
-    	return ingresos;
+        return ingresos;
     }
 
+    // Método para obtener la lista de gastos de la cuenta
     public List<Gasto> getGastos() {
-    	
-    	
-    	return gastos;
+        return gastos;
     }
 
+    // Método toString para representar la cuenta como una cadena de texto
     @Override
     public String toString() {
-        return "SALDO :" + String.format("%.2f", saldo) + "€";
+        return "SALDO: " + String.format("%.2f", saldo) + "€";
     }
 }

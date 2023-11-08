@@ -6,15 +6,14 @@
  */
 public class Ingreso extends Dinero{
    	//inserta código aquí
-	public Ingreso(String description, double ingreso) {
+	public Ingreso(double ingreso, String description) {
 		// TODO Auto-generated constructor stub
 		this.dinero = ingreso;
 		this.description = description; 
 		
 	}
 	// configuracion de la impresion por pantalla la lista de ingresos
-	@Override
-    public String toString() {
+	public String toString() {
         return "Ingreso{" +
                 "dinero=" + getDinero() +
                 ", descripcion='" + getDescription() + '\'' +
